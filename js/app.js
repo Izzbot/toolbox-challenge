@@ -5,12 +5,12 @@ var tiles = [];
 var matches = 0;
 var misses = 0;
 var currentImg;
+var startTime = _.now();
 
 // Let's start by running after the DOM is ready
 $(document).ready(function() {
 
     var i;
-    var startTime = _.now();
 
     // Load up the tile array
     for (i = 1; i <= 32; i++) {
@@ -22,11 +22,22 @@ $(document).ready(function() {
         });
     }
 	
+	// Start up the game!
+	startGame();
+});
+
+/*
+ * Starts a game
+ */
+function startGame() {
+
 	// Make the game board!
     buildGameboard();
 
     // Build the game functionality
     $('#game-board img').click(function() {
+
+		console.log("CLICK");
        var img = $(this);
        var tile = img.data('tile');
 		
@@ -47,12 +58,8 @@ $(document).ready(function() {
 
 	   			// No match
 	   			} else {
-
-//  NEED TO ADD A DELAY OF 1000ms HERE
-
-					flipImage(img);
-					flipImage(currentImg);					
 					misses++;
+					matchFail(img, currentImg);
 	   			}
 	   			
 				currentImg = 0;
@@ -62,20 +69,30 @@ $(document).ready(function() {
 	   			currentImg = img;		
 	   		}        
        }        
-
-        console.log(elapsed);
     });
 
+    // Start a timer
+	newTimer();
+	
+	// Set up the new game button
+	$('#newGameButton').click(function() {
+    	startGame();
+	});
+}
 
-    // Build the timers
+
+
+/* 
+ * Start a new timer
+ */
+function newTimer() {
+    	startTime = _.now();
     var timer = window.setInterval(function() {
-		var elapsed = 20;
-//		var elapsed = moment().diff(startTime, 'seconds');
-//        var elapsed = Math.floor(_.now() - startTime / 1000);
-        $('elapsed').text('Time Elapsed: ' + elapsed);
-        $('matches').text('Matches: ' + matches);
-        $('remaining').text('Remaining: ' + (8 - matches));
-        $('misses').text('Misses: ' + misses);
+		var elapsed = moment().diff(startTime, 'seconds');
+        $('#elapsed').text('Time Elapsed: ' + elapsed + 's');
+        $('#matches').text('Matches: ' + matches);
+        $('#remaining').text('Remaining: ' + (8 - matches));
+        $('#misses').text('Misses: ' + misses);
 
         // Stop the timer when necessary
         if (matches == 8) {
@@ -83,13 +100,8 @@ $(document).ready(function() {
             winGame();
         }
     },1000);
-
-
-	// Set up the new game button
-	$('#newGameButton').click(function() {
-		buildGameboard();
-	});
-});
+	
+}
 
 
 /*
@@ -110,10 +122,42 @@ function flipImage(img) {
 }
 
 /*
+ * Flips the two tiles back down after a failed match
+ */
+function matchFail(img1, img2) {
+		var tile1 = img1.data('tile');
+		var tile2 = img2.data('tile');
+		
+		var timeout = window.setTimeout(function() {
+	        img1.fadeOut(100, function() {
+	            img1.attr('src', 'img/tile-back.png');
+	            tile1.flipped = !tile1.flipped;
+	            img1.fadeIn(100);
+	        });
+	        img2.fadeOut(100, function() {
+	            img2.attr('src', 'img/tile-back.png');
+	            tile2.flipped = !tile2.flipped;
+	            img2.fadeIn(100);
+	        });
+		}, 1000);
+	
+}
+
+/*
  * Display Victory
  */
 function winGame() {
-	console.log('YOU HAVE WON THE GAME');
+	$('#game-board img').fadeOut(3000);
+	var timeout = window.setTimeout(function() {
+		
+		$('#message').css('display', 'block');
+		
+	}, 3000);
+
+	timeout = window.setTimeout(function() {
+		$('#message').css('display', 'none');
+		startGame();
+	}, 6000);
 }
 
 /*
@@ -140,6 +184,7 @@ function buildGameboard() {
     var board = $('#game-board');
     var row = $(document.createElement('div'));
     var img;
+    
     _.forEach(gameTiles, function(tile, elemIndex) {
         if (elemIndex > 0 && 0 == elemIndex % 4) {
             board.append(row);

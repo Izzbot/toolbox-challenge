@@ -4,36 +4,52 @@ html {
 }
 
 #game-board img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 ul#infoList {
     list-style:none;
 }
+
 ul#infoList li {
-    display:inline-block;
     display: inline-block;
     background-color: #fefefe;
     border: 1px solid;
     list-style: none;
     padding: 3px;
     border-radius: 5px 5px;
-    color:rgb(40,40,40);
-    text-decoration:none;
+    color: rgb(40,40,40);
+    text-decoration: none;
     margin-right: 10px;
 }
 
 p#newGameButton {
-    display:inline-block;
     display: inline-block;
     background-color: #fefefe;
+    font-weight: bold;
     border: 1px solid;
+    border-color: red;
     list-style: none;
     padding: 3px;
     border-radius: 5px 5px;
-    color:rgb(40,40,40);
-    text-decoration:none;
+    color: red;
+    text-decoration: none;
     margin-right: 10px;
+    cursor: pointer;
+}
+
+h1 {
+	color: white;
+}
+
+div#message {
+	display: none;
+	
+}
+
+div#main {
+	margin-left: 10%;
 }
