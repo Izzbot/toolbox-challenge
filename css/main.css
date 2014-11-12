@@ -26,15 +26,9 @@ ul#infoList li {
     margin-right: 10px;
 }
 
-p#newGameButton {
-    display: inline-block;
-    background-color: #fefefe;
+ul#infoList li#newGameButton {
     font-weight: bold;
-    border: 1px solid;
     border-color: red;
-    list-style: none;
-    padding: 3px;
-    border-radius: 5px 5px;
     color: red;
     text-decoration: none;
     margin-right: 10px;
