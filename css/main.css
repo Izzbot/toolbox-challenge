@@ -3,9 +3,9 @@ html {
     background-color: #000000;
 }
 
-#game-board img {
-    width: 150px;
-    height: 150px;
+div#game-board img {
+    width: 170px;
+    height: 170px;
     margin-right: 5px;
     cursor: pointer;
 }
@@ -35,6 +35,17 @@ ul#infoList li#newGameButton {
     cursor: pointer;
 }
 
+ul#infoList li#instructions {
+    font-weight: bold;
+    border-color: red;
+    margin-right: 10px;
+    cursor: pointer;
+    
+} a {
+    text-decoration: none;
+    color: red;
+}
+
 h1 {
 	color: white;
 }
@@ -46,4 +57,10 @@ div#message {
 
 div#main {
 	margin-left: 10%;
+}
+
+p#info {
+	color: white;
+	font-weight: bold;
+	font-size: 14 px;	
 }

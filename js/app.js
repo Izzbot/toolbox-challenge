@@ -1,6 +1,6 @@
+"use strict"
 
-
-// Set up the necessary variables
+// Set up the global variables
 var tiles = [];
 var matches = 0;
 var misses = 0;
@@ -37,7 +37,7 @@ function startGame() {
     // Build the game functionality
     $('#game-board img').click(function() {
 
-		console.log("CLICK");
+		// Set up the needed starting variables
        var img = $(this);
        var tile = img.data('tile');
 		
@@ -61,12 +61,16 @@ function startGame() {
 					misses++;
 					matchFail(img, currentImg);
 	   			}
-	   			
+
+				// Set up for the next initial click
+				$('#game-board img').css('cursor', 'pointer');	   			
 				currentImg = 0;
 
 	   		// Otherwise, set it up as the first selected image	
 	   		} else {
-	   			currentImg = img;		
+	   			currentImg = img;
+				$('#game-board img').css('cursor', 'crosshair');
+		
 	   		}        
        }        
     });
