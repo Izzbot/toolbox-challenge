@@ -5,11 +5,13 @@ var tiles = [];
 var matches = 0;
 var misses = 0;
 var currentImg;
-var startTime = _.now();
+var startTime;
+var rulesShown;
 
 // Let's start by running after the DOM is ready
 $(document).ready(function() {
 
+	// Starting variables
     var i;
 
     // Load up the tile array
@@ -82,6 +84,18 @@ function startGame() {
 	$('#newGameButton').click(function() {
     	startGame();
 	});
+	
+	// Set up the Instructions button
+	$('#instructionsButton').click(function() {
+		if (rulesShown) {
+			$('#message').empty();
+			rulesShown = false;
+		} else {
+			$('#message').html('To complete your aptitude test, select two tiles to see if they match.  If they do not match, they will be<br>flipped face down and you will have to select again.  Continue attempting to match tiles until all are face up.<br>You will be timed.  If you wish to reset the board, click the Reset button.');
+			rulesShown = true;
+		}
+	});
+	
 }
 
 
@@ -132,7 +146,7 @@ function matchFail(img1, img2) {
 		var tile1 = img1.data('tile');
 		var tile2 = img2.data('tile');
 		
-		var timeout = window.setTimeout(function() {
+		_.delay(function() {
 	        img1.fadeOut(100, function() {
 	            img1.attr('src', 'img/tile-back.png');
 	            tile1.flipped = !tile1.flipped;
@@ -151,15 +165,22 @@ function matchFail(img1, img2) {
  * Display Victory
  */
 function winGame() {
+	
+	// Fade the board out
 	$('#game-board img').fadeOut(3000);
-	var timeout = window.setTimeout(function() {
-		
-		$('#message').css('display', 'block');
-		
+
+	// Show the victory 
+	_.delay(function() {
+		$('#message').html('<img src="img/congrats.jpg">');	
+
+		// Note, this was needed because sometimes a single img would get caught
+		// still un-hidden in the DOM
+		$('#game-board img').hide();
 	}, 3000);
 
-	timeout = window.setTimeout(function() {
-		$('#message').css('display', 'none');
+	// Start a new game
+	_.delay(function() {
+		$('#message').empty();
 		startGame();
 	}, 6000);
 }
