@@ -91,7 +91,7 @@ function startGame() {
 			$('#message').empty();
 			rulesShown = false;
 		} else {
-			$('#message').html('To complete your aptitude test, select two tiles to see if they match.  If they do not match, they will be<br>flipped face down and you will have to select again.  Continue attempting to match tiles until all are face up.<br>You will be timed.  If you wish to reset the board, click the Reset button.');
+			$('#message').html('To complete your aptitude test, select two tiles to see if they match.  If they do not match, they will be flipped face down and you will have to select again.  Continue attempting to match tiles until all are face up.  You will be timed.  If you wish to reset the board, click the Reset button.');
 			rulesShown = true;
 		}
 	});

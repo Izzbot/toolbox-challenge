@@ -1,6 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400);
 
 html {
     background-color: #000000;
+    font-family: Lato, "Helvetica Nueue", Helvetica, sans-serif;
 }
 
 div#game-board img {
@@ -12,6 +14,8 @@ div#game-board img {
 
 ul#infoList {
     list-style:none;
+    position: relative;
+    left: -40px;
 }
 
 ul#infoList li {
@@ -31,7 +35,6 @@ ul#infoList li#newGameButton {
     border-color: #ff0000;
     color: #ff0000;
     text-decoration: none;
-    margin-right: 10px;
     cursor: pointer;
 }
 
@@ -40,7 +43,6 @@ ul#infoList li#instructionsButton {
     border-color: #ff0000;
     color: #ff0000;
     text-decoration: none;
-    margin-right: 10px;
     cursor: pointer;
     
 }
@@ -48,20 +50,30 @@ ul#infoList li#instructionsButton {
 ul#infoList li#elapsed {
 	font-size: 18px;
     font-weight: bold;
-	color: #0000ff;
+	color: #ffffff;
 	background-color: #000000;
-    border: none;
+    border: 1px solid;
+    border-color: #ffffff;
+    border-radius: 5px 5px;
+    width: 160px; 
+}
+
+ul#infoList li#misses {
+	width: 78px;
 }
 
 h1 {
 	color: #ffffff;
+	position: relative;	
+	left: 20px;	
 }
 
 div#message {
 	color: #ffffff;
-	padding-bottom: 10px;	
+	padding-bottom: 10px;
+	width: 695px;	
 }
 
 div#main {
-	margin-left: 10%;
+	margin-left: 100px;
 }
